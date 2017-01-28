@@ -6,7 +6,7 @@ class Database {
 
     Connection conn = null;
 
-    private void initDatabase() {
+    public void initDatabase() {
         createConnection();
         createTable();
 

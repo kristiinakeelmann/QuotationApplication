@@ -10,6 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -21,6 +22,7 @@ public class Tsitaadid {
     public Tsitaadid() {
         final Database dbcon = new Database();
         dbcon.createConnection();
+        // dbcon.createTable();
 
 
         Stage stage = new Stage();
@@ -62,7 +64,7 @@ public class Tsitaadid {
         Text quotationText = new Text();
 
         TextField emailTextField = new TextField();
-        // JLabel myLabel1 = new JLabel("Saada tsitaat oma e-mailile!");
+
         emailTextField.setPromptText("Sisesta oma e-mail");
 
         Text emailSendingMessageTextField = new Text();
@@ -92,6 +94,7 @@ public class Tsitaadid {
                 final Database dbcon = new Database();
                 dbcon.createConnection();
                 dbcon.selectTable();
+
 
                 //muutuja, nimi, selle hilisem kasutamine
                 ArrayList<String> result = dbcon.selectQuoatitonByYearAndKeyword(yearCombobox.getValue(), keywordCombobox.getValue());

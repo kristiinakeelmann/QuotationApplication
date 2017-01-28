@@ -9,6 +9,7 @@ class Database {
     private void initDatabase() {
         createConnection();
         createTable();
+
     }
 
     // Et andmebaasi kasutada peame sellega esiteks ühenduse looma

@@ -16,14 +16,12 @@ import javax.mail.internet.MimeMessage;
 import java.util.*;
 
 
-public class Tsitaadid extends Application {
+public class Tsitaadid {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
+    public Tsitaadid() {
         final Database dbcon = new Database();
         dbcon.createConnection();
-        dbcon.selectTable();
+
 
         Stage stage = new Stage();
         StackPane stackPane = new StackPane();
@@ -36,20 +34,19 @@ public class Tsitaadid extends Application {
 
         ComboBox<String> yearCombobox = new ComboBox<String>();
         ArrayList<String> yearComboboxValue = new ArrayList<String>();
-        try{
+        try {
             yearComboboxValue = dbcon.selectColumn("AASTA");
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             yearComboboxValue = new ArrayList<String>();
         }
         yearCombobox.getItems().addAll(yearComboboxValue);
 
-
         ComboBox<String> keywordCombobox = new ComboBox<String>();
         ArrayList<String> keywordComboboxValue = new ArrayList<String>();
         try {
             keywordComboboxValue = dbcon.selectColumn("MARKSONA");
-        } catch (Exception e ) {
+        } catch (Exception e) {
             e.printStackTrace();
             keywordComboboxValue = new ArrayList<String>();
         }
@@ -65,14 +62,14 @@ public class Tsitaadid extends Application {
         Text quotationText = new Text();
 
         TextField emailTextField = new TextField();
-       // JLabel myLabel1 = new JLabel("Saada tsitaat oma e-mailile!");
+        // JLabel myLabel1 = new JLabel("Saada tsitaat oma e-mailile!");
         emailTextField.setPromptText("Sisesta oma e-mail");
 
         Text emailSendingMessageTextField = new Text();
 
 
         TextField quotationTextField = new TextField();
-         // JLabel myLabel2 = new JLabel("Sisesta uus tsitaat");
+        // JLabel myLabel2 = new JLabel("Sisesta uus tsitaat");
         quotationTextField.setPromptText("Sisesta tsitaat");
 
         TextField yearTextField = new TextField();
@@ -104,7 +101,7 @@ public class Tsitaadid extends Application {
                     quotationText.setText("Ei leidu tsitaati");
                 }
 
-                }
+            }
 
         });
 
@@ -156,18 +153,17 @@ public class Tsitaadid extends Application {
         });
 
 
-                saveQuotationButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
+        saveQuotationButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
 
-                    if (quotationTextField.getText().toString().equalsIgnoreCase("")) {
-                        return;
-                    }
-
-                    dbcon.enterQuotation(quotationTextField.getText().toString(), yearTextField.getText().toString(), keywordTextField.getText().toString());
-
+                if (quotationTextField.getText().toString().equalsIgnoreCase("")) {
+                    return;
                 }
-        });
 
+                dbcon.enterQuotation(quotationTextField.getText().toString(), yearTextField.getText().toString(), keywordTextField.getText().toString());
+
+            }
+        });
     }
 }

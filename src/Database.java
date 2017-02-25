@@ -82,7 +82,8 @@ class Database {
     public ArrayList<String> selectColumn(String value) {
         try {
             Statement stat = this.conn.createStatement();
-            ResultSet rs = stat.executeQuery("SELECT " + value + " FROM TSITAAT");
+            ResultSet rs = stat.executeQuery("SELECT DISTINCT " + value + " FROM TSITAAT");
+            // küsin unikaalsed andmebaasi väärtused
             ArrayList<String> valueFromDatabase = new ArrayList<String>();
             while (rs.next()) {
                 valueFromDatabase.add(rs.getString(value));

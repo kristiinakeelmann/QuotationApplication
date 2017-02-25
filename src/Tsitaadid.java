@@ -24,7 +24,6 @@ public class Tsitaadid {
         dbcon.createConnection();
         // dbcon.createTable();
 
-
         Stage stage = new Stage();
         StackPane stackPane = new StackPane();
         BorderPane borderPane = new BorderPane();
@@ -33,6 +32,7 @@ public class Tsitaadid {
         stage.setScene(scene);
         stage.show();
 
+        Text selectingQutation = new Text("Tee oma valik ja süsteem leiab Sulle tsitaadi!");
 
         ComboBox<String> yearCombobox = new ComboBox<String>();
         ArrayList<String> yearComboboxValue = new ArrayList<String>();
@@ -55,23 +55,20 @@ public class Tsitaadid {
 
         keywordCombobox.getItems().addAll(keywordComboboxValue);
 
-
         Button findQuotationButton = new Button("Leia tsitaat valiku põhjal!");
 
         Button sendEmailButton = new Button("Saada!");
 
-
         Text quotationText = new Text();
 
         TextField emailTextField = new TextField();
-
+        Text sendingEmail = new Text("Saada tsitaat edasi");
         emailTextField.setPromptText("Sisesta oma e-mail");
-
         Text emailSendingMessageTextField = new Text();
 
+        Text insertingQuota = new Text("Sisesta uus tsitaat");
 
         TextField quotationTextField = new TextField();
-        // JLabel myLabel2 = new JLabel("Sisesta uus tsitaat");
         quotationTextField.setPromptText("Sisesta tsitaat");
 
         TextField yearTextField = new TextField();
@@ -82,7 +79,7 @@ public class Tsitaadid {
 
         Button saveQuotationButton = new Button("Salvesta!");
 
-        VBox vBox = new VBox(yearCombobox, keywordCombobox, findQuotationButton, quotationText, emailTextField, sendEmailButton, emailSendingMessageTextField, quotationTextField, yearTextField, keywordTextField, saveQuotationButton);
+        VBox vBox = new VBox(selectingQutation, yearCombobox, keywordCombobox, findQuotationButton, quotationText, sendingEmail, emailTextField, sendEmailButton, emailSendingMessageTextField, insertingQuota, quotationTextField, yearTextField, keywordTextField, saveQuotationButton);
         vBox.setSpacing(20);
         borderPane.setCenter(vBox);
 
@@ -94,8 +91,7 @@ public class Tsitaadid {
                 final Database dbcon = new Database();
                 dbcon.createConnection();
                 dbcon.selectTable();
-
-
+                
                 //muutuja, nimi, selle hilisem kasutamine
                 ArrayList<String> result = dbcon.selectQuoatitonByYearAndKeyword(yearCombobox.getValue(), keywordCombobox.getValue());
                 if (result.size() > 0) {
@@ -142,7 +138,7 @@ public class Tsitaadid {
                             InternetAddress.parse(emailTextField.getText().toString()));
                     message.setSubject("Kiri tsitaadirakenduselt");
                     message.setText("Sinu valitud tsitaat:" +
-                            quotationTextField.getText().toString());
+                            quotationText.getText().toString());
                     Transport.send(message);
 
                     System.out.println("Mail sent succesfully!");
